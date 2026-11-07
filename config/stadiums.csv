@@ -1,0 +1,33 @@
+team,stadium,city,latitude,longitude,verified
+Ajaccio,Stade François Coty,Ajaccio,41.9333,8.7269,false
+Amiens,Stade de la Licorne,Amiens,49.8831,2.2989,false
+Angers,Stade Raymond Kopa,Angers,47.4671,-0.5328,false
+Auxerre,Stade Abbé-Deschamps,Auxerre,47.7999,3.5668,false
+Bastia,Stade Armand Cesari,Bastia,42.6981,9.4864,false
+Bordeaux,Matmut Atlantique,Bordeaux,44.8994,-0.5614,false
+Brest,Stade Francis-Le Blé,Brest,48.4022,-4.4903,false
+Caen,Stade Michel d'Ornano,Caen,49.1783,-0.4356,false
+Clermont,Stade Gabriel Montpied,Clermont-Ferrand,45.7972,3.1103,false
+Dijon,Stade Gaston Gérard,Dijon,47.3122,5.0397,false
+Guingamp,Stade du Roudourou,Guingamp,48.5614,-3.1517,false
+Le Havre,Stade Océane,Le Havre,49.5061,0.1839,false
+Lens,Stade Bollaert-Delelis,Lens,50.4328,2.8153,false
+Lille,Stade Pierre-Mauroy,Villeneuve-d'Ascq,50.6119,3.1300,false
+Lorient,Stade du Moustoir,Lorient,47.7469,-3.3697,false
+Lyon,Groupama Stadium,Décines-Charpieu,45.7653,4.9822,false
+Marseille,Stade Vélodrome,Marseille,43.2698,5.3958,false
+Metz,Stade Saint-Symphorien,Metz,49.1097,6.1719,false
+Monaco,Stade Louis II,Fontvieille,43.7276,7.4153,false
+Montpellier,Stade de la Mosson,Montpellier,43.6231,3.8128,false
+Nancy,Stade Marcel Picot,Tomblaine,48.6650,6.2261,false
+Nantes,Stade de la Beaujoire,Nantes,47.2559,-1.5250,false
+Nice,Allianz Riviera,Nice,43.7053,7.1928,false
+Nimes,Stade des Costières,Nîmes,43.8181,4.3781,false
+Paris FC,Stade Sébastien Charléty,Paris,48.8189,2.3436,false
+Paris SG,Parc des Princes,Paris,48.8414,2.2530,false
+Reims,Stade Auguste-Delaune,Reims,49.2447,4.0281,false
+Rennes,Roazhon Park,Rennes,48.1073,-1.7128,false
+St Etienne,Stade Geoffroy-Guichard,Saint-Étienne,45.4608,4.3903,false
+Strasbourg,Stade de la Meinau,Strasbourg,48.5600,7.7550,false
+Toulouse,Stadium de Toulouse,Toulouse,43.5828,1.4342,false
+Troyes,Stade de l'Aube,Troyes,48.3072,4.0958,false

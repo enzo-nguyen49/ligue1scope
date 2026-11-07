@@ -1,0 +1,170 @@
+{
+  "pipeline": "ligue1scope",
+  "run_id": "20261107T192828Z-a485f1",
+  "started_at": "2026-11-07T19:28:28+00:00",
+  "contract_version": "2.0",
+  "status": "PASS_WITH_WARNINGS",
+  "steps": {
+    "collect": {
+      "status": "ok",
+      "duration_seconds": 10.795,
+      "mode": "url",
+      "collected": 0,
+      "unchanged": 0,
+      "unavailable": 10,
+      "manifest": "manifest_20261107T192828Z.json",
+      "unavailable_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ]
+    },
+    "profile": {
+      "status": "ok",
+      "duration_seconds": 0.206,
+      "rows": 3477,
+      "output": "reports/profiling_report.json"
+    },
+    "validate": {
+      "status": "ok",
+      "duration_seconds": 0.056,
+      "rejected_file": null,
+      "quality_gate_passed": true
+    },
+    "transform": {
+      "status": "ok",
+      "duration_seconds": 0.873,
+      "curated_rows": 3477,
+      "columns": 36
+    },
+    "publish": {
+      "status": "ok",
+      "duration_seconds": 0.042,
+      "database": "skipped"
+    }
+  },
+  "warnings": [
+    "source indisponible pour 10 saison(s) : repli sur la derniere version raw collectee",
+    "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?",
+    "PostgreSQL non charge (DATABASE_URL absent ou --no-db) : fichiers curated seulement"
+  ],
+  "errors": [],
+  "inputs": [
+    {
+      "season": "2016-2017",
+      "raw_file": "ligue1_2016-2017_20260925T071007Z.csv",
+      "sha256": "3039aecaf3de6e6ef95450b3349bf0337a118b6ed47fc234509953aaee23b4c5",
+      "fallback": false
+    },
+    {
+      "season": "2017-2018",
+      "raw_file": "ligue1_2017-2018_20260925T071007Z.csv",
+      "sha256": "95997fd3c3e13be3101b216fe9b26a9ce6715ac6b76b115e44926c12b90977e6",
+      "fallback": false
+    },
+    {
+      "season": "2018-2019",
+      "raw_file": "ligue1_2018-2019_20260925T071007Z.csv",
+      "sha256": "31559a4d8b52eff6f78e13a9b33d7b844e4f41d823dd1cf5c1aaa61c51eaaf9c",
+      "fallback": false
+    },
+    {
+      "season": "2019-2020",
+      "raw_file": "ligue1_2019-2020_20260925T071007Z.csv",
+      "sha256": "bda566f6aea24bc2f08cceac8f7d6c81d7f9c64cfda9fdae7eb9be2b84dddd2a",
+      "fallback": false
+    },
+    {
+      "season": "2020-2021",
+      "raw_file": "ligue1_2020-2021_20260925T071007Z.csv",
+      "sha256": "124560ab39a1c256eb6ee5ad2dd1eed250c9780d0cbb34525d9abee41fbf7f70",
+      "fallback": false
+    },
+    {
+      "season": "2021-2022",
+      "raw_file": "ligue1_2021-2022_20260925T071007Z.csv",
+      "sha256": "9e9eaefb8704264f8d55a718a119d940de4af7d7b4217ac4097b957406e16213",
+      "fallback": false
+    },
+    {
+      "season": "2022-2023",
+      "raw_file": "ligue1_2022-2023_20260925T071007Z.csv",
+      "sha256": "18ea07d922e8b6360b81189637efd5aaf44779765db856bff208d5b1acf69b2f",
+      "fallback": false
+    },
+    {
+      "season": "2023-2024",
+      "raw_file": "ligue1_2023-2024_20260925T071007Z.csv",
+      "sha256": "ca0a4bf51d5b1ccfd0e1558ea41de6bb829df6c96c759888a87248d296d5adb7",
+      "fallback": false
+    },
+    {
+      "season": "2024-2025",
+      "raw_file": "ligue1_2024-2025_20260925T071007Z.csv",
+      "sha256": "fe6ae6a0c30d05f0ac88e0fc4a31452c7203e2b444703dfa941e22f38f20ab63",
+      "fallback": false
+    },
+    {
+      "season": "2025-2026",
+      "raw_file": "ligue1_2025-2026_20260925T071007Z.csv",
+      "sha256": "898b7ddcd373cfe955ae353b1a98cf7f1c8757ca10b69d53039f4e098e88f192",
+      "fallback": false
+    }
+  ],
+  "input_rows": 3477,
+  "accepted_rows": 3477,
+  "rejected_rows": 0,
+  "duplicates_removed": 0,
+  "rejected_ratio": 0.0,
+  "freshness": {
+    "latest_match_date": "2026-05-17",
+    "reference_date": "2026-11-07",
+    "age_days": 174,
+    "threshold_days": 30,
+    "status": "STALE"
+  },
+  "rejection_counts_by_rule": {
+    "completude_champs_obligatoires": 0,
+    "validite_date": 0,
+    "validite_buts": 0,
+    "coherence_saison": 0,
+    "coherence_resultat": 0,
+    "coherence_equipes": 0,
+    "unicite_match": 0,
+    "validite_cotes": 0,
+    "fraicheur": 1,
+    "volumetrie_saison": 0,
+    "tracabilite": 0
+  },
+  "kpi": {
+    "scope": "2017-2018 a 2025-2026 (hors saison de chauffe Elo)",
+    "matches": 3097,
+    "elo_favorite_win_rate": 0.5079,
+    "market_favorite_win_rate": 0.5218,
+    "elo_market_agreement_rate": 0.8938,
+    "home_win_rate": 0.4333,
+    "avg_goals_per_match": 2.742,
+    "weather_coverage_ratio": 1.0,
+    "odds_coverage_ratio": 1.0
+  },
+  "outputs": {
+    "curated_csv": "data/curated/matches_curated.csv",
+    "curated_parquet": "data/curated/matches_curated.parquet",
+    "curated_csv_bytes": 1105795,
+    "curated_parquet_bytes": 237190,
+    "kpi_favori_par_saison": "data/curated/mart/kpi_favori_par_saison.csv",
+    "kpi_tranche_elo": "data/curated/mart/kpi_tranche_elo.csv",
+    "kpi_meteo_temperature": "data/curated/mart/kpi_meteo_temperature.csv",
+    "kpi_meteo_precipitations": "data/curated/mart/kpi_meteo_precipitations.csv"
+  },
+  "finished_at": "2026-11-07T19:28:40+00:00",
+  "duration_seconds": 11.972,
+  "log_file": "reports/logs/pipeline_20261107T192828Z-a485f1.log"
+}

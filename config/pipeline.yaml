@@ -1,0 +1,59 @@
+# Configuration d'execution du pipeline Ligue1Scope.
+# Aucun secret ici : la connexion PostgreSQL passe par la variable
+# d'environnement DATABASE_URL (voir .env.example).
+
+pipeline: ligue1scope
+contract_file: config/data_contract.yaml
+
+source:
+  ligue1:
+    # Mode par defaut de `python src/pipeline.py --collect` :
+    #   url   -> telechargement depuis Football-Data.co.uk
+    #   local -> copie de fichiers deja telecharges (16-17.csv, 17-18.csv...)
+    default_mode: url
+    url_template: "https://www.football-data.co.uk/mmz4281/{code}/F1.csv"
+    local_dir: data/source_seasons
+    seasons:
+      - "2016-2017"
+      - "2017-2018"
+      - "2018-2019"
+      - "2019-2020"
+      - "2020-2021"
+      - "2021-2022"
+      - "2022-2023"
+      - "2023-2024"
+      - "2024-2025"
+      - "2025-2026"
+    timeout_seconds: 20
+    max_retries: 3
+    backoff_seconds: 2
+    user_agent: "ligue1scope-eseo-project/2.0 (usage academique)"
+
+paths:
+  raw_ligue1: data/raw/ligue1
+  raw_weather: data/raw/weather
+  quarantine: data/rejected/quarantine
+  curated: data/curated
+  rejected: data/rejected
+  reports: reports
+  stadiums: config/stadiums.csv
+
+quality:
+  goals_min: 0
+  goals_max: 15
+  odds_min: 1.01
+  odds_max: 100.0
+  # Quality gate : au-dela de ce taux de rejet, le run est FAIL et rien
+  # n'est publie (le curated precedent est conserve).
+  max_rejected_ratio: 0.05
+  # Fraicheur : age maximal (jours) du match le plus recent avant alerte.
+  freshness_max_days: 30
+  # Couverture meteo minimale avant alerte.
+  min_weather_coverage: 0.80
+
+elo:
+  initial_rating: 1500
+  home_advantage: 100
+  k_factor: 20
+  # Nombre de saisons de "chauffe" exclues des KPI (Elo encore non converge).
+  warmup_seasons: 1

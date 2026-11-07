@@ -1,0 +1,21 @@
+digraph L {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=12, labelloc=t, label="Ligue1Scope - Lineage des champs (source -> curated -> vues)\n", pad=0.3, nodesep=0.15, ranksep=1.1];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=9, fillcolor="#F4F4F4", color="#777777", height=0.3];
+  edge [color="#888888", arrowsize=0.6];
+  subgraph cluster_a { label="F1.csv (Football-Data)"; color="#D9822B"; style=rounded;
+    a1 [label="Date"]; a2 [label="Time"]; a3 [label="HomeTeam / AwayTeam"]; a4 [label="FTHG / FTAG"]; a5 [label="FTR"]; a6 [label="AvgH/D/A  |  BbAvH/D/A"]; a7 [label="nom du fichier + SHA-256 + n° ligne"]; }
+  subgraph cluster_b { label="Open-Meteo JSON"; color="#D9822B"; style=rounded;
+    b1 [label="hourly: temperature_2m,\nprecipitation, wind_speed_10m"]; b2 [label="daily: *_mean / *_sum / *_max"]; }
+  subgraph cluster_c { label="matches_curated / football_match"; color="#2E8B57"; style=rounded; node [fillcolor="#EAF7EE", color="#2E8B57"];
+    c0 [label="match_id (cle)"]; c1 [label="season, match_date"]; c2 [label="kickoff_time\nkickoff_time_missing"]; c3 [label="home_team, away_team"];
+    c4 [label="home_goals, away_goals\ntotal_goals, result"]; c5 [label="home_elo, away_elo, elo_diff\nelo_home_win_expectancy\nelo_favorite(_won), elo_warmup"];
+    c6 [label="odds_*_avg, odds_valid\nmarket_prob_*\nmarket_favorite(_won)"]; c7 [label="weather_temp_c, _precip_mm,\n_wind_kph, weather_granularity\nweather_missing"];
+    c8 [label="source_file, raw_sha256, source_row"]; c9 [label="data_quality_status"]; }
+  subgraph cluster_d { label="Vues PostgreSQL / mart"; color="#4057F5"; style=rounded; node [fillcolor="#EEF2FF", color="#4057F5"];
+    d1 [label="v_kpi_favori_par_saison"]; d2 [label="v_kpi_tranche_elo"]; d3 [label="v_kpi_meteo_temperature\nv_kpi_meteo_precipitations"]; }
+  a1 -> c1; a1 -> c0; a3 -> c0; a2 -> c2; a3 -> c3; a4 -> c4; a5 -> c4; a6 -> c6; a7 -> c8;
+  c4 -> c5 [label="compute_elo.py", fontsize=8, fontcolor="#4057F5"]; c1 -> c5 [style=dotted];
+  b1 -> c7 [label="heure connue", fontsize=8]; b2 -> c7 [label="sinon jour", fontsize=8]; c2 -> c7 [style=dotted];
+  c2 -> c9; c6 -> c9; c7 -> c9;
+  c5 -> d1; c6 -> d1; c5 -> d2; c4 -> d2; c7 -> d3; c4 -> d3;
+}

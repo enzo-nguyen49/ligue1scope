@@ -1,0 +1,171 @@
+{
+  "generated_at": "2026-11-07T19:28:48+00:00",
+  "database_used": true,
+  "scenarios": [
+    {
+      "scenario": "1_valeurs_invalides",
+      "expected": "7 lignes rejetees avec motif, publication maintenue (PASS_WITH_WARNINGS)",
+      "status": "PASS_WITH_WARNINGS",
+      "run_id": "20261107T192823Z-bee060",
+      "input_rows": 3484,
+      "accepted_rows": 3477,
+      "rejected_rows": 7,
+      "duplicates_removed": 1,
+      "rejection_counts": {
+        "completude_champs_obligatoires": 1,
+        "validite_date": 1,
+        "validite_buts": 1,
+        "coherence_saison": 1,
+        "coherence_resultat": 1,
+        "coherence_equipes": 1,
+        "unicite_match": 1,
+        "fraicheur": 1
+      },
+      "warnings": [
+        "7 ligne(s) rejetee(s), conservees dans data/rejected/rejected_20261107T192823Z-bee060.csv",
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?",
+        "PostgreSQL non charge (DATABASE_URL absent ou --no-db) : fichiers curated seulement"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "2_doublons_massifs",
+      "expected": "FAIL par quality gate, curated precedent intact",
+      "status": "FAIL",
+      "run_id": "20261107T192825Z-9d5777",
+      "input_rows": 3783,
+      "accepted_rows": 3477,
+      "rejected_rows": 306,
+      "duplicates_removed": 306,
+      "rejection_counts": {
+        "unicite_match": 306,
+        "fraicheur": 1
+      },
+      "warnings": [
+        "306 ligne(s) rejetee(s), conservees dans data/rejected/rejected_20261107T192825Z-9d5777.csv",
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?"
+      ],
+      "errors": [
+        "RuntimeError: Quality gate non franchi : taux de rejet 8.1% > seuil 5% (quality gate)"
+      ],
+      "curated_unchanged": true
+    },
+    {
+      "scenario": "3_changement_schema",
+      "expected": "fichier en quarantaine, repli sur la version precedente, 3 477 lignes",
+      "status": "PASS_WITH_WARNINGS",
+      "run_id": "20261107T192826Z-04f469",
+      "input_rows": 3477,
+      "accepted_rows": 3477,
+      "rejected_rows": 0,
+      "duplicates_removed": 0,
+      "rejection_counts": {
+        "fraicheur": 1
+      },
+      "warnings": [
+        "ligue1_2025-2026_20991231T235959Z.csv mis en quarantaine (schema_invalide: colonnes absentes ['FTHG']) -> data/rejected/quarantine/ligue1_2025-2026_20991231T235959Z.csv",
+        "Saison 2025-2026 : repli sur la version valide precedente ligue1_2025-2026_20260925T071007Z.csv",
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?",
+        "PostgreSQL non charge (DATABASE_URL absent ou --no-db) : fichiers curated seulement"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "4_fichier_vide",
+      "expected": "fichier en quarantaine, repli sur la version precedente",
+      "status": "PASS_WITH_WARNINGS",
+      "run_id": "20261107T192827Z-299ee3",
+      "input_rows": 3477,
+      "accepted_rows": 3477,
+      "rejected_rows": 0,
+      "duplicates_removed": 0,
+      "rejection_counts": {
+        "fraicheur": 1
+      },
+      "warnings": [
+        "ligue1_2025-2026_20991231T235959Z.csv mis en quarantaine (fichier_vide) -> data/rejected/quarantine/ligue1_2025-2026_20991231T235959Z.csv",
+        "Saison 2025-2026 : repli sur la version valide precedente ligue1_2025-2026_20260925T071007Z.csv",
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?",
+        "PostgreSQL non charge (DATABASE_URL absent ou --no-db) : fichiers curated seulement"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "5_source_indisponible",
+      "expected": "erreurs journalisees, repli sur la zone raw existante",
+      "status": "PASS_WITH_WARNINGS",
+      "run_id": "20261107T192828Z-a485f1",
+      "input_rows": 3477,
+      "accepted_rows": 3477,
+      "rejected_rows": 0,
+      "duplicates_removed": 0,
+      "rejection_counts": {
+        "fraicheur": 1
+      },
+      "warnings": [
+        "source indisponible pour 10 saison(s) : repli sur la derniere version raw collectee",
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?",
+        "PostgreSQL non charge (DATABASE_URL absent ou --no-db) : fichiers curated seulement"
+      ],
+      "errors": []
+    },
+    {
+      "scenario": "6_echec_publication",
+      "expected": "FAIL sans publication, puis reprise par simple rejeu",
+      "status": "FAIL",
+      "run_id": "20261107T192840Z-1e0c00",
+      "input_rows": 3477,
+      "accepted_rows": 3477,
+      "rejected_rows": 0,
+      "duplicates_removed": 0,
+      "rejection_counts": {
+        "fraicheur": 1
+      },
+      "warnings": [
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?"
+      ],
+      "errors": [
+        "OperationalError: connection failed: connection to server at \"127.0.0.1\", port 1 failed: Connection refused\n\tIs the server running on that host and accepting TCP/IP connections?"
+      ],
+      "recovery_status": "PASS_WITH_WARNINGS",
+      "recovery_database": {
+        "inserted": 3477,
+        "updated": 0,
+        "unchanged": 0,
+        "rows_in_view": 3477
+      }
+    },
+    {
+      "scenario": "7_rejeu_idempotent",
+      "expected": "curated identique et 0 ligne inseree au 2e passage",
+      "status": "PASS_WITH_WARNINGS",
+      "run_id": "20261107T192846Z-219a66",
+      "input_rows": 3477,
+      "accepted_rows": 3477,
+      "rejected_rows": 0,
+      "duplicates_removed": 0,
+      "rejection_counts": {
+        "fraicheur": 1
+      },
+      "warnings": [
+        "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?"
+      ],
+      "errors": [],
+      "curated_sha256_run1": "c80916bd370ed6adcbe14f08b0f154968731104f8b525acf8bc5e9423d0aff61",
+      "curated_sha256_run2": "c80916bd370ed6adcbe14f08b0f154968731104f8b525acf8bc5e9423d0aff61",
+      "identical": true,
+      "database_run1": {
+        "inserted": 3477,
+        "updated": 0,
+        "unchanged": 0,
+        "rows_in_view": 3477
+      },
+      "database_run2": {
+        "inserted": 0,
+        "updated": 0,
+        "unchanged": 3477,
+        "rows_in_view": 3477
+      }
+    }
+  ]
+}

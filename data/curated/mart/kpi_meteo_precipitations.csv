@@ -1,0 +1,5 @@
+precipitation_class,matches,home_win_rate,draw_rate,away_win_rate,avg_goals,avg_goal_diff
+0 mm,2136,0.4331,0.2523,0.3146,2.747,0.289
+> 0 à 1 mm,584,0.4401,0.2312,0.3288,2.719,0.182
+> 1 à 5 mm,264,0.3788,0.3144,0.3068,2.735,0.22
+> 5 mm,113,0.531,0.2301,0.2389,2.779,0.655

@@ -1,0 +1,122 @@
+{
+  "run_id": "20261107T192826Z-04f469",
+  "contract_version": "2.0",
+  "input_rows": 3477,
+  "accepted_rows": 3477,
+  "rejected_rows": 0,
+  "duplicates_removed": 0,
+  "rejected_ratio": 0.0,
+  "quality_gate": {
+    "max_rejected_ratio": 0.05,
+    "passed": true
+  },
+  "freshness": {
+    "latest_match_date": "2026-05-17",
+    "reference_date": "2026-11-07",
+    "age_days": 174,
+    "threshold_days": 30,
+    "status": "STALE"
+  },
+  "rules": [
+    {
+      "id": "R1",
+      "rule": "completude_champs_obligatoires",
+      "dimension": "Completude",
+      "action": "REJETER",
+      "description": "Date, HomeTeam, AwayTeam, FTHG, FTAG et FTR sont renseignes",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R2",
+      "rule": "validite_date",
+      "dimension": "Validite",
+      "action": "REJETER",
+      "description": "Date est une date reelle au format JJ/MM/AA ou JJ/MM/AAAA",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R3",
+      "rule": "validite_buts",
+      "dimension": "Validite",
+      "action": "REJETER",
+      "description": "FTHG et FTAG sont des entiers entre goals_min et goals_max",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R4",
+      "rule": "coherence_saison",
+      "dimension": "Coherence",
+      "action": "REJETER",
+      "description": "la date du match tombe entre le 1er juillet et le 30 juin de la saison du fichier",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R5",
+      "rule": "coherence_resultat",
+      "dimension": "Coherence",
+      "action": "REJETER",
+      "description": "FTR vaut H, D ou A et correspond au score final",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R6",
+      "rule": "coherence_equipes",
+      "dimension": "Coherence",
+      "action": "REJETER",
+      "description": "l'equipe a domicile est differente de l'equipe a l'exterieur",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R7",
+      "rule": "unicite_match",
+      "dimension": "Unicite",
+      "action": "DEDUPLIQUER",
+      "description": "la cle metier (saison, date, domicile, exterieur) est unique ; 1re occurrence gardee",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R8",
+      "rule": "validite_cotes",
+      "dimension": "Validite",
+      "action": "SIGNALER",
+      "description": "les cotes moyennes sont numeriques et entre odds_min et odds_max (sinon mises a NULL)",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R9",
+      "rule": "fraicheur",
+      "dimension": "Fraicheur",
+      "action": "ALERTER",
+      "description": "le match le plus recent date de moins de freshness_max_days jours",
+      "failures": 1,
+      "status": "WARN"
+    },
+    {
+      "id": "R10",
+      "rule": "volumetrie_saison",
+      "dimension": "Completude",
+      "action": "ALERTER",
+      "description": "chaque saison contient au moins 70 % des n*(n-1) matchs attendus",
+      "failures": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "R11",
+      "rule": "tracabilite",
+      "dimension": "Tracabilite",
+      "action": "BLOQUER",
+      "description": "chaque ligne acceptee conserve source_file, raw_sha256 et source_row",
+      "failures": 0,
+      "status": "PASS"
+    }
+  ],
+  "rejected_file": null
+}

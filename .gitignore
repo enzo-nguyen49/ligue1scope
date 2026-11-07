@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+*.log
+*.tmp
+# traces d'execution locales (un exemple est conserve dans reports/)
+reports/logs/*
+!reports/logs/.gitkeep
+reports/runs/*
+!reports/runs/.gitkeep
+# quarantaine : revue locale, un exemple de motif est dans reports/incidents/
+data/rejected/quarantine/
+# dossier de telechargements manuels (mode --collect local)
+data/source_seasons/

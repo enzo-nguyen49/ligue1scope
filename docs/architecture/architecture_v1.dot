@@ -1,0 +1,15 @@
+digraph V1 {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=12, labelloc=t, label="Ligue1Scope - Architecture V1 (seances 1-2 : chaine minimale)\n", pad=0.3, nodesep=0.4];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, fillcolor="#EEF2FF", color="#4057F5"];
+  edge [color="#555555", fontname="Helvetica", fontsize=9];
+  src [label="Football-Data.co.uk\nCSV par saison\n(producteur : football-data.co.uk)", fillcolor="#FFF4E5", color="#D9822B"];
+  meteo [label="Open-Meteo Archive API\nJSON (CC BY 4.0)", fillcolor="#FFF4E5", color="#D9822B"];
+  col [label="Collecteurs Python\ncollect_ligue1 / collect_weather"];
+  raw [label="data/raw\nCSV + JSON horodates\nmanifeste SHA-256", shape=folder, fillcolor="#F4F4F4", color="#777777"];
+  val [label="validate.py\n5 regles"];
+  rej [label="data/rejected\n+ motif", shape=folder, fillcolor="#FDECEC", color="#C23B3B"];
+  tr [label="transform.py\nElo + meteo"];
+  cur [label="data/curated\n3 CSV (dataset, strict, analysis)", shape=folder, fillcolor="#EAF7EE", color="#2E8B57"];
+  app [label="Analyse / Power BI", fillcolor="#FFFFFF"];
+  src -> col; meteo -> col; col -> raw; raw -> val; val -> rej [label="invalides"]; val -> tr [label="valides"]; tr -> cur; cur -> app;
+}

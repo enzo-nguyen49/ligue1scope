@@ -1,0 +1,122 @@
+{
+  "pipeline": "ligue1scope",
+  "run_id": "20261107T192825Z-9d5777",
+  "started_at": "2026-11-07T19:28:25+00:00",
+  "contract_version": "2.0",
+  "status": "FAIL",
+  "steps": {
+    "collect": {
+      "status": "skipped",
+      "reason": "rejeu depuis la zone raw"
+    },
+    "profile": {
+      "status": "ok",
+      "duration_seconds": 0.204,
+      "rows": 3783,
+      "output": "reports/profiling_report.json"
+    },
+    "validate": {
+      "status": "ok",
+      "duration_seconds": 0.062,
+      "rejected_file": "data/rejected/rejected_20261107T192825Z-9d5777.csv",
+      "quality_gate_passed": false
+    }
+  },
+  "warnings": [
+    "306 ligne(s) rejetee(s), conservees dans data/rejected/rejected_20261107T192825Z-9d5777.csv",
+    "fraicheur : dernier match le 2026-05-17 (174 jours > seuil 30) - saison en cours non collectee ?"
+  ],
+  "errors": [
+    "RuntimeError: Quality gate non franchi : taux de rejet 8.1% > seuil 5% (quality gate)"
+  ],
+  "inputs": [
+    {
+      "season": "2016-2017",
+      "raw_file": "ligue1_2016-2017_20260925T071007Z.csv",
+      "sha256": "3039aecaf3de6e6ef95450b3349bf0337a118b6ed47fc234509953aaee23b4c5",
+      "fallback": false
+    },
+    {
+      "season": "2017-2018",
+      "raw_file": "ligue1_2017-2018_20260925T071007Z.csv",
+      "sha256": "95997fd3c3e13be3101b216fe9b26a9ce6715ac6b76b115e44926c12b90977e6",
+      "fallback": false
+    },
+    {
+      "season": "2018-2019",
+      "raw_file": "ligue1_2018-2019_20260925T071007Z.csv",
+      "sha256": "31559a4d8b52eff6f78e13a9b33d7b844e4f41d823dd1cf5c1aaa61c51eaaf9c",
+      "fallback": false
+    },
+    {
+      "season": "2019-2020",
+      "raw_file": "ligue1_2019-2020_20260925T071007Z.csv",
+      "sha256": "bda566f6aea24bc2f08cceac8f7d6c81d7f9c64cfda9fdae7eb9be2b84dddd2a",
+      "fallback": false
+    },
+    {
+      "season": "2020-2021",
+      "raw_file": "ligue1_2020-2021_20260925T071007Z.csv",
+      "sha256": "124560ab39a1c256eb6ee5ad2dd1eed250c9780d0cbb34525d9abee41fbf7f70",
+      "fallback": false
+    },
+    {
+      "season": "2021-2022",
+      "raw_file": "ligue1_2021-2022_20260925T071007Z.csv",
+      "sha256": "9e9eaefb8704264f8d55a718a119d940de4af7d7b4217ac4097b957406e16213",
+      "fallback": false
+    },
+    {
+      "season": "2022-2023",
+      "raw_file": "ligue1_2022-2023_20260925T071007Z.csv",
+      "sha256": "18ea07d922e8b6360b81189637efd5aaf44779765db856bff208d5b1acf69b2f",
+      "fallback": false
+    },
+    {
+      "season": "2023-2024",
+      "raw_file": "ligue1_2023-2024_20260925T071007Z.csv",
+      "sha256": "ca0a4bf51d5b1ccfd0e1558ea41de6bb829df6c96c759888a87248d296d5adb7",
+      "fallback": false
+    },
+    {
+      "season": "2024-2025",
+      "raw_file": "ligue1_2024-2025_20260925T071007Z.csv",
+      "sha256": "fe6ae6a0c30d05f0ac88e0fc4a31452c7203e2b444703dfa941e22f38f20ab63",
+      "fallback": false
+    },
+    {
+      "season": "2025-2026",
+      "raw_file": "ligue1_2025-2026_20991231T235959Z.csv",
+      "sha256": "1823674e3be1f7e1837186cea3ba8f7c7cb81dac5db31d11cae2e2417b76e55c",
+      "fallback": false
+    }
+  ],
+  "input_rows": 3783,
+  "accepted_rows": 3477,
+  "rejected_rows": 306,
+  "duplicates_removed": 306,
+  "rejected_ratio": 0.0809,
+  "freshness": {
+    "latest_match_date": "2026-05-17",
+    "reference_date": "2026-11-07",
+    "age_days": 174,
+    "threshold_days": 30,
+    "status": "STALE"
+  },
+  "rejection_counts_by_rule": {
+    "completude_champs_obligatoires": 0,
+    "validite_date": 0,
+    "validite_buts": 0,
+    "coherence_saison": 0,
+    "coherence_resultat": 0,
+    "coherence_equipes": 0,
+    "unicite_match": 306,
+    "validite_cotes": 0,
+    "fraicheur": 1,
+    "volumetrie_saison": 0,
+    "tracabilite": 0
+  },
+  "finished_at": "2026-11-07T19:28:26+00:00",
+  "duration_seconds": 0.266,
+  "log_file": "reports/logs/pipeline_20261107T192825Z-9d5777.log"
+}

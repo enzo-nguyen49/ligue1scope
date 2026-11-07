@@ -1,0 +1,111 @@
+dataset: ligue1_matches_curated
+version: "2.0"
+owner: Enzo - etudiant ESEO, projet final Architecture BD et collecte de donnees
+consumers:
+  - analyste performance / preparation d'avant-match (Power BI)
+grain: >
+  une ligne represente un match de Ligue 1 dispute, identifie par la saison,
+  la date, l'equipe recevante et l'equipe visiteuse, enrichi de l'Elo des deux
+  equipes AVANT le match, des cotes moyennes du marche avant-match et de la
+  meteo au stade a l'heure du coup d'envoi (ou du jour si l'heure est inconnue)
+business_key: [season, match_date, home_team, away_team]
+primary_key: match_id   # "<saison>_<AAAAMMJJ>_<domicile>_<exterieur>"
+
+changelog:
+  - version: "1.0"
+    date: "2026-09-23"
+    change: version initiale, Elo prevu depuis l'API ClubElo
+  - version: "1.1"
+    date: "2026-09-25"
+    change: >
+      ClubElo (api.clubelo.com) en HTTP 502 persistant : Elo calcule en interne
+      a partir des resultats deja collectes ; collecteur ClubElo abandonne.
+  - version: "2.0"
+    date: "2026-11-07"
+    change: >
+      Ajout des cotes moyennes avant-match (colonnes AvgH/D/A, BbAvH/D/A avant
+      2019-2020) et des probabilites implicites normalisees ; favori Elo et
+      favori du marche ; indicateur elo_warmup (saison 2016-2017 exclue des KPI) ;
+      colonnes de lignage source_file, raw_sha256, source_row ; regles de
+      fraicheur, volumetrie et tracabilite ; suppression des imputations
+      (une valeur absente reste NULL et est signalee) ; un seul curated
+      (matches_curated.csv/.parquet) au lieu de trois variantes.
+
+sources:
+  - name: football_data_co_uk
+    url: https://www.football-data.co.uk/mmz4281/{code}/F1.csv
+    access: telechargement HTTP public sans cle (ou copie de fichiers telecharges)
+    format: CSV, une saison par fichier
+    frequency: hebdomadaire en saison (mise a jour apres chaque journee), figee en fin de saison
+    role: source primaire (resultats, heure, cotes)
+    license: fichiers gratuits, conditions du disclaimer du site, citer la source (voir docs/sources.md)
+  - name: open_meteo_archive
+    url: https://archive-api.open-meteo.com/v1/archive
+    access: API REST JSON sans cle, usage non commercial
+    frequency: a la demande (historique)
+    role: enrichissement (temperature, precipitations, vent)
+    license: CC BY 4.0, citation Zippenfenig (2023)
+  - name: elo_interne
+    type: donnee derivee (src/compute_elo.py)
+    parameters: {initial_rating: 1500, home_advantage: 100, k_factor: 20}
+
+required_fields:
+  - match_id
+  - season
+  - match_date
+  - home_team
+  - away_team
+  - home_goals
+  - away_goals
+  - result
+  - home_elo
+  - away_elo
+  - source_file
+  - raw_sha256
+
+nullable_fields:
+  kickoff_time: absente de la source avant 2019-2020
+  odds_home_avg: NULL si cote absente ou hors domaine (regle R8)
+  weather_temp_c: NULL si meteo non collectee pour le stade (couverture 100 % au 07/11/2026)
+
+quality_rules:
+  - {id: R1, name: completude_champs_obligatoires, dimension: completude, action: rejeter,
+     condition: "Date, HomeTeam, AwayTeam, FTHG, FTAG, FTR non vides"}
+  - {id: R2, name: validite_date, dimension: validite, action: rejeter,
+     condition: "Date au format JJ/MM/AA ou JJ/MM/AAAA et date reelle"}
+  - {id: R3, name: validite_buts, dimension: validite, action: rejeter,
+     condition: "FTHG et FTAG entiers dans [0, 15]"}
+  - {id: R4, name: coherence_saison, dimension: coherence, action: rejeter,
+     condition: "1er juillet annee N <= date <= 30 juin annee N+1"}
+  - {id: R5, name: coherence_resultat, dimension: coherence, action: rejeter,
+     condition: "FTR = H si FTHG > FTAG, D si egalite, A sinon"}
+  - {id: R6, name: coherence_equipes, dimension: coherence, action: rejeter,
+     condition: "HomeTeam <> AwayTeam"}
+  - {id: R7, name: unicite_match, dimension: unicite, action: dedupliquer,
+     condition: "cle metier unique ; 1re occurrence conservee, copies rejetees et comptees"}
+  - {id: R8, name: validite_cotes, dimension: validite, action: signaler,
+     condition: "cotes numeriques dans [1.01, 100] ; sinon NULL et odds_valid = false"}
+  - {id: R9, name: fraicheur, dimension: fraicheur, action: alerter,
+     condition: "age du match le plus recent <= 30 jours (config quality.freshness_max_days)"}
+  - {id: R10, name: volumetrie_saison, dimension: completude, action: alerter,
+     condition: "matchs par saison >= 70 % de n*(n-1)"}
+  - {id: R11, name: tracabilite, dimension: tracabilite, action: bloquer,
+     condition: "chaque ligne acceptee porte source_file, raw_sha256, source_row"}
+  - {id: SCHEMA, name: schema_fichier_raw, dimension: validite, action: quarantaine,
+     condition: "fichier non vide et colonnes Date, HomeTeam, AwayTeam, FTHG, FTAG, FTR presentes"}
+
+quality_gate:
+  max_rejected_ratio: 0.05
+  on_failure: run FAIL, aucune publication, curated et base precedents conserves
+
+deduplication_strategy: cle metier match_id (R7) puis UPSERT PostgreSQL ON CONFLICT (match_id)
+idempotence: >
+  collecte : un fichier raw n'est ecrit que si son SHA-256 differe de la derniere
+  version de la saison ; transformation deterministe (curated identique octet pour
+  octet au rejeu) ; base : UPSERT qui ne met a jour une ligne que si son row_hash change.
+
+retention:
+  raw: conservation integrale (rejouabilite), versions horodatees
+  quarantine: conservation integrale avec motif, revue manuelle
+  rejected: un fichier par run, 1 an
+  reports: run_report.json courant + historique runs/ et run_history.jsonl

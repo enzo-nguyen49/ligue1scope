@@ -1,0 +1,132 @@
+{
+  "run_id": "20261107T192851Z-0710d3",
+  "shape": {
+    "rows": 3477,
+    "columns": 17
+  },
+  "inferred_types": {
+    "Date": "date (JJ/MM/AA ou JJ/MM/AAAA)",
+    "HomeTeam": "string",
+    "AwayTeam": "string",
+    "FTHG": "number",
+    "FTAG": "number",
+    "FTR": "string",
+    "Div": "string",
+    "Time": "time (HH:MM)",
+    "HTHG": "number",
+    "HTAG": "number",
+    "HS": "number",
+    "AS": "number",
+    "HST": "number",
+    "AST": "number",
+    "odds_home_avg": "number",
+    "odds_draw_avg": "number",
+    "odds_away_avg": "number"
+  },
+  "missing_ratio": {
+    "Time": 0.3279,
+    "HTHG": 0.0003,
+    "HTAG": 0.0003,
+    "HS": 0.0003,
+    "AS": 0.0003,
+    "HST": 0.0003,
+    "AST": 0.0003
+  },
+  "duplicate_rows_full": 0,
+  "duplicate_rows_business_key": 0,
+  "rows_per_season": {
+    "2016-2017": 380,
+    "2017-2018": 380,
+    "2018-2019": 380,
+    "2019-2020": 279,
+    "2020-2021": 380,
+    "2021-2022": 380,
+    "2022-2023": 380,
+    "2023-2024": 306,
+    "2024-2025": 306,
+    "2025-2026": 306
+  },
+  "numeric_ranges": {
+    "FTHG": {
+      "min": 0.0,
+      "max": 9.0,
+      "non_numeric": 0
+    },
+    "FTAG": {
+      "min": 0.0,
+      "max": 7.0,
+      "non_numeric": 0
+    },
+    "HTHG": {
+      "min": 0.0,
+      "max": 6.0,
+      "non_numeric": 0
+    },
+    "HTAG": {
+      "min": 0.0,
+      "max": 5.0,
+      "non_numeric": 0
+    },
+    "HS": {
+      "min": 2.0,
+      "max": 41.0,
+      "non_numeric": 0
+    },
+    "AS": {
+      "min": 0.0,
+      "max": 31.0,
+      "non_numeric": 0
+    },
+    "HST": {
+      "min": 0.0,
+      "max": 15.0,
+      "non_numeric": 0
+    },
+    "AST": {
+      "min": 0.0,
+      "max": 15.0,
+      "non_numeric": 0
+    },
+    "odds_home_avg": {
+      "min": 1.05,
+      "max": 20.82,
+      "non_numeric": 0
+    },
+    "odds_draw_avg": {
+      "min": 2.09,
+      "max": 15.05,
+      "non_numeric": 0
+    },
+    "odds_away_avg": {
+      "min": 1.12,
+      "max": 36.91,
+      "non_numeric": 0
+    }
+  },
+  "top_values": {
+    "FTR": {
+      "H": 1528,
+      "A": 1072,
+      "D": 877
+    },
+    "HomeTeam": {
+      "Nice": 180,
+      "Lille": 180,
+      "Monaco": 179,
+      "Marseille": 179,
+      "Nantes": 179
+    },
+    "AwayTeam": {
+      "Lyon": 180,
+      "Nantes": 179,
+      "Rennes": 179,
+      "Monaco": 179,
+      "Marseille": 179
+    },
+    "Div": {
+      "F1": 3477
+    }
+  },
+  "distinct_teams": 32,
+  "kickoff_time_available_from": "2019-2020"
+}
