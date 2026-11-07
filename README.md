@@ -139,7 +139,23 @@ Rapports écrits à chaque run :
 
 - **Fichiers :** `data/curated/matches_curated.csv` et `.parquet` (239 Ko contre 1,1 Mo en CSV). Les KPI sont dans `data/curated/mart/kpi_*.csv`.
 - **PostgreSQL :** la vue de détail `v_match_analysis` et les vues de KPI `v_kpi_favori_par_saison`, `v_kpi_tranche_elo`, `v_kpi_meteo_temperature` et `v_kpi_meteo_precipitations`. Le journal des runs est dans `pipeline_run`.
-- **Power BI :** `ProjetLigue1.pbix` (4 pages : vue d'ensemble, Elo, météo, club). Connexion : *Obtenir les données → PostgreSQL → v_match_analysis*. Les mesures DAX à ajouter sont dans [docs/powerbi.md](docs/powerbi.md).
+- **Power BI :** `ProjetLigue1.pbix`, branché sur la vue PostgreSQL `v_match_analysis` (*Obtenir les données → PostgreSQL*). Il compte 4 pages ; leurs mesures DAX et valeurs de contrôle sont dans [docs/powerbi.md](docs/powerbi.md).
+
+**Page 1, Vue d'ensemble :** volumes, buts par match par saison, répartition des résultats, bilan par club.
+
+![Power BI, page 1 : vue d'ensemble](docs/powerbi/page1_vue_ensemble.png)
+
+**Page 2, Elo et résultats :** répond à la question centrale. La victoire à domicile passe de 17 % à 72 % selon l'écart Elo ; le favori Elo gagne 50,8 % des matchs contre 52,2 % pour celui du marché. La saison de chauffe 2016-2017 est exclue.
+
+![Power BI, page 2 : Elo et résultats](docs/powerbi/page2_elo_resultats.png)
+
+**Page 3, Météo et matchs :** buts et résultats selon la pluie et la température, couverture météo de 100 %.
+
+![Power BI, page 3 : météo et matchs](docs/powerbi/page3_meteo.png)
+
+**Page 4, Comparaison des équipes :** bilan, Elo moyen et buts d'un club, par saison (exemple : Paris SG).
+
+![Power BI, page 4 : comparaison des équipes](docs/powerbi/page4_equipes.png)
 
 ## 10. Limites, choix écartés et perspectives
 
