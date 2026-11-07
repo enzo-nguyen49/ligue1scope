@@ -180,6 +180,7 @@ Rapports écrits à chaque run :
 ## 11. Synthèse et soutenance
 
 - Synthèse PDF (6 pages) : [docs/synthese_ligue1scope.pdf](docs/synthese_ligue1scope.pdf).
+- Annexes de la synthèse (architecture V1 → V2, 4 pages Power BI, usage de l'IA) : [docs/Annexes_synthese_ligue1scope.pdf](docs/Annexes_synthese_ligue1scope.pdf).
 - Déroulé de démonstration (6 min) et réponses aux questions du guide : [docs/soutenance.md](docs/soutenance.md).
 
 ## 12. Arborescence
